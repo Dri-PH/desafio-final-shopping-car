@@ -87,6 +87,10 @@ class App extends Component{
       listaDeCompras: this.state.listaDeCompras.filter((object) => object.id !== id)
     });
   };
+
+  /*totalValue = () => {
+    carros.reduce((x, y) => ( x + y.Preço, 0))
+  }*/
   render(){
     return(
       <S.Container>
@@ -97,25 +101,27 @@ class App extends Component{
         <S.RowInterface>
           <S.CarHub>
             {this.state.carros.map((item,index) => (
-            <S.CarCard key={index}>
+            <S.Hover key={index}>
               <S.AddBar>
-                <h2>{item.nome}</h2>
-                <button onClick={() => this.add(item)} /*onChange={this.handleChange}*/> + </button>
-              </S.AddBar>
-              <div>
-                <ul>
-                  <li><b>Montadora:</b> {item.Montadora}</li>
-                  <li><b>Preço:</b> R${item.Preço}</li>
-                  <li><b>Tipo:</b> {item.Tipo}</li>
-                </ul>
-              </div>
-            </S.CarCard>
+                  <h2>{item.nome}</h2>
+                  <button onClick={() => this.add(item)} /*onChange={this.handleChange}*/> + </button>
+                </S.AddBar>
+              <S.CarCard>
+                <div>
+                  <ul>
+                    <li><b>Montadora:</b> {item.Montadora}</li>
+                    <li><b>Preço:</b> R${item.Preço}</li>
+                    <li><b>Tipo:</b> {item.Tipo}</li>
+                  </ul>
+                </div>
+              </S.CarCard>
+            </S.Hover>
             ))}
           </S.CarHub>
           <S.CartShop>
             {this.state.listaDeCompras.map((item,index) => (
               <S.ShopCard key={index}>
-                <div>
+                <S.BoxScrow>
                   <S.RemoveBar>
                     <h2>{item.nome}</h2>
                     <button onClick={() => this.remove(item.id)}> - </button>
@@ -126,11 +132,16 @@ class App extends Component{
                       <li><b>Tipo:</b> {item.Tipo}</li>
                     </ul>
                   </div>
-                </div>
+                </S.BoxScrow>
               </S.ShopCard>
             ))}
           </S.CartShop>
         </S.RowInterface>
+        <div>
+          <div>
+            <p>R$:{}</p>
+          </div>
+        </div>
       </S.Container>
     )
   }
